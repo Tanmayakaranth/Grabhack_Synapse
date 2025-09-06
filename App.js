@@ -1,31 +1,115 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'expo-status-bar';
 
-import LoginScreen from "./src/screens/LoginScreen";
-import DeliveryDashboard from "./src/screens/DeliveryDashboard";
-import SignupScreen from "./src/screens/SignupScreen";
-// import RescheduleScreen from "./src/screens/RescheduleScreen";
-import RestaurantDashboard from "./src/screens/RestaurantDashboard";
-import SmartAlerts from "./src/screens/SmartAlerts";
-import ChatbotScreen from "./src/screens/ChatbotScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-// import ProfileScreen from "./src/screens/ProfileScreen";
+// Import all screens
+import HomeScreen from './screens/HomeScreen';
+import RecipientUnavailableScreen from './screens/RecipientUnavailableScreen';
+import OverloadedRestaurantScreen from './screens/OverloadedRestaurantScreen';
+
+// Recipient Unavailable Feature Screens
+import PreCheckAvailabilityScreen from './screens/RecipientUnavailable/PreCheckAvailabilityScreen';
+import TrustedHandoverScreen from './screens/RecipientUnavailable/TrustedHandoverScreen';
+import SmartReroutingScreen from './screens/RecipientUnavailable/SmartReroutingScreen';
+import AutoRescheduleScreen from './screens/RecipientUnavailable/AutoRescheduleScreen';
+import AIVoiceConnectScreen from './screens/RecipientUnavailable/AIVoiceConnectScreen';
+
+// Overloaded Restaurant Feature Screens
+import PreOrderScreen from './screens/OverloadedRestaurant/PreOrderScreen';
+import AtCheckoutScreen from './screens/OverloadedRestaurant/AtCheckoutScreen';
+import OrderPlacedScreen from './screens/OverloadedRestaurant/OrderPlacedScreen';
+import PostOrderScreen from './screens/OverloadedRestaurant/PostOrderScreen';
+import ChatbotScreen from './screens/OverloadedRestaurant/ChatbotScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        {/* <Stack.Screen name="Reschedule" component={RescheduleScreen} /> */}
-        <Stack.Screen name="Restaurant" component={RestaurantDashboard} />
-        <Stack.Screen name="Alerts" component={SmartAlerts} />
-        <Stack.Screen name="Chatbot" component={ChatbotScreen} />
-        {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+      <StatusBar style="auto" />
+      <Stack.Navigator 
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f59e0b',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        {/* Main Navigation */}
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ title: 'Smart Delivery Solutions' }}
+        />
+        <Stack.Screen 
+          name="RecipientUnavailable" 
+          component={RecipientUnavailableScreen} 
+          options={{ title: 'Recipient Unavailable' }}
+        />
+        <Stack.Screen 
+          name="OverloadedRestaurant" 
+          component={OverloadedRestaurantScreen} 
+          options={{ title: 'Overloaded Restaurant' }}
+        />
+
+        {/* Recipient Unavailable Feature Screens */}
+        <Stack.Screen 
+          name="PreCheckAvailability" 
+          component={PreCheckAvailabilityScreen} 
+          options={{ title: 'Pre-Check Availability' }}
+        />
+        <Stack.Screen 
+          name="TrustedHandover" 
+          component={TrustedHandoverScreen} 
+          options={{ title: 'Trusted Handover' }}
+        />
+        <Stack.Screen 
+          name="SmartRerouting" 
+          component={SmartReroutingScreen} 
+          options={{ title: 'Smart Re-routing' }}
+        />
+        <Stack.Screen 
+          name="AutoReschedule" 
+          component={AutoRescheduleScreen} 
+          options={{ title: 'Auto Reschedule' }}
+        />
+        <Stack.Screen 
+          name="AIVoiceConnect" 
+          component={AIVoiceConnectScreen} 
+          options={{ title: 'AI Voice Connect' }}
+        />
+
+        {/* Overloaded Restaurant Feature Screens */}
+        <Stack.Screen 
+          name="PreOrder" 
+          component={PreOrderScreen} 
+          options={{ title: 'Pre-Order (Precaution)' }}
+        />
+        <Stack.Screen 
+          name="AtCheckout" 
+          component={AtCheckoutScreen} 
+          options={{ title: 'At Checkout' }}
+        />
+        <Stack.Screen 
+          name="OrderPlaced" 
+          component={OrderPlacedScreen} 
+          options={{ title: 'Order Placed' }}
+        />
+        <Stack.Screen 
+          name="PostOrder" 
+          component={PostOrderScreen} 
+          options={{ title: 'Post-Order' }}
+        />
+        <Stack.Screen 
+          name="Chatbot" 
+          component={ChatbotScreen} 
+          options={{ title: 'Chatbot Assistant' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
