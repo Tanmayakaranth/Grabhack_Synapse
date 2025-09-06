@@ -4,23 +4,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 
 // Import all screens
-import HomeScreen from './screens/HomeScreen';
-import RecipientUnavailableScreen from './screens/RecipientUnavailableScreen';
-import OverloadedRestaurantScreen from './screens/OverloadedRestaurantScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import RecipientUnavailableScreen from './src/screens/RecipientUnavailableScreen';
+import OverloadedRestaurantScreen from './src/screens/OverloadedRestaurantScreen';
 
 // Recipient Unavailable Feature Screens
-import PreCheckAvailabilityScreen from './screens/RecipientUnavailable/PreCheckAvailabilityScreen';
-import TrustedHandoverScreen from './screens/RecipientUnavailable/TrustedHandoverScreen';
-import SmartReroutingScreen from './screens/RecipientUnavailable/SmartReroutingScreen';
-import AutoRescheduleScreen from './screens/RecipientUnavailable/AutoRescheduleScreen';
-import AIVoiceConnectScreen from './screens/RecipientUnavailable/AIVoiceConnectScreen';
+import PreCheckAvailabilityScreen from './src/screens/RecipientUnavailable/PreCheckAvailabilityScreen';
+//import TrustedHandoverScreen from './src/screens/RecipientUnavailable/TrustedHandoverScreen';
+import SmartReroutingScreen from './src/screens/RecipientUnavailable/SmartReroutingScreen';
+//import AutoRescheduleScreen from './src/screens/RecipientUnavailable/AutoRescheduleScreen';
+//import AIVoiceConnectScreen from './src/screens/RecipientUnavailable/AIVoiceConnectScreen';
 
 // Overloaded Restaurant Feature Screens
-import PreOrderScreen from './screens/OverloadedRestaurant/PreOrderScreen';
-import AtCheckoutScreen from './screens/OverloadedRestaurant/AtCheckoutScreen';
-import OrderPlacedScreen from './screens/OverloadedRestaurant/OrderPlacedScreen';
-import PostOrderScreen from './screens/OverloadedRestaurant/PostOrderScreen';
-import ChatbotScreen from './screens/OverloadedRestaurant/ChatbotScreen';
+import PreOrderScreen from './src/screens/OverloadedRestaurant/PreOrderScreen';
+// import AtCheckoutScreen from './src/screens/OverloadedRestaurant/AtCheckoutScreen';
+// import OrderPlacedScreen from './src/screens/OverloadedRestaurant/OrderPlacedScreen';
+// import PostOrderScreen from './src/screens/OverloadedRestaurant/PostOrderScreen';
+// import ChatbotScreen from './src/screens/OverloadedRestaurant/ChatbotScreen';
 
 const Stack = createStackNavigator();
 
