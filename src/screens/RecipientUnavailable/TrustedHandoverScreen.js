@@ -28,7 +28,7 @@ const TrustedHandoverScreen = () => {
               Our system allows recipients to provide digital consent for a secure and authorized handover to a trusted third party.
             </Text>
           </View>
-          <View style={styles.featuresSection}>
+          {/* <View style={styles.featuresSection}>
             <Text style={styles.featuresTitle}>Key Features</Text>
             {features.map((feature, index) => (
               <View key={index} style={styles.featureItem}>
@@ -36,7 +36,7 @@ const TrustedHandoverScreen = () => {
                 <Text style={styles.featureText}>{feature}</Text>
               </View>
             ))}
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     </LinearGradient>

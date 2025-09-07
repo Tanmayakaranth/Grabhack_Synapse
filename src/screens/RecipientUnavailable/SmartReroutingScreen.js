@@ -259,43 +259,9 @@ const SmartReroutingScreen = ({ navigation }) => {
             </View>
           )}
 
-          {/* AI/ML Features */}
-          <View style={styles.aiContainer}>
-            <Text style={styles.sectionTitle}>AI-Powered Features</Text>
-            <View style={styles.aiFeaturesList}>
-              <View style={styles.aiFeature}>
-                <Ionicons name="location-outline" size={20} color="#3b82f6" />
-                <View style={styles.aiFeatureText}>
-                  <Text style={styles.aiFeatureTitle}>Geospatial Analysis</Text>
-                  <Text style={styles.aiFeatureDesc}>Real-time location optimization</Text>
-                </View>
-              </View>
-              <View style={styles.aiFeature}>
-                <Ionicons name="analytics-outline" size={20} color="#10b981" />
-                <View style={styles.aiFeatureText}>
-                  <Text style={styles.aiFeatureTitle}>Predictive Routing</Text>
-                  <Text style={styles.aiFeatureDesc}>ML-based route optimization</Text>
-                </View>
-              </View>
-              <View style={styles.aiFeature}>
-                <Ionicons name="shield-checkmark-outline" size={20} color="#8b5cf6" />
-                <View style={styles.aiFeatureText}>
-                  <Text style={styles.aiFeatureTitle}>Trust Scoring</Text>
-                  <Text style={styles.aiFeatureDesc}>Confidence-based recommendations</Text>
-                </View>
-              </View>
-              <View style={styles.aiFeature}>
-                <Ionicons name="time-outline" size={20} color="#f59e0b" />
-                <View style={styles.aiFeatureText}>
-                  <Text style={styles.aiFeatureTitle}>Time Optimization</Text>
-                  <Text style={styles.aiFeatureDesc}>Dynamic ETA calculations</Text>
-                </View>
-              </View>
-            </View>
-          </View>
 
           {/* Backend Integration */}
-          <View style={styles.integrationCard}>
+          {/* <View style={styles.integrationCard}>
             <Text style={styles.sectionTitle}>Backend Integration Points</Text>
             <View style={styles.integrationList}>
               <Text style={styles.integrationItem}>• Google Maps API for geolocation</Text>
@@ -304,7 +270,7 @@ const SmartReroutingScreen = ({ navigation }) => {
               <Text style={styles.integrationItem}>• ML models (scikit-learn) for confidence scoring</Text>
               <Text style={styles.integrationItem}>• Real-time communication via WebSocket</Text>
             </View>
-          </View>
+          </View> */}
         </ScrollView>
       </LinearGradient>
     </View>

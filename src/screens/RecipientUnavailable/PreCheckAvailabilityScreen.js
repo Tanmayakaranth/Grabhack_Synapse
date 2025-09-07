@@ -209,22 +209,7 @@ const PreCheckAvailabilityScreen = ({ navigation }) => {
             )}
           </View>
 
-          {/* ML Integration Info */}
-          <View style={styles.mlCard}>
-            <Text style={styles.sectionTitle}>AI/ML Integration Points</Text>
-            <View style={styles.mlFeature}>
-              <Ionicons name="analytics-outline" size={20} color="#f59e0b" />
-              <Text style={styles.mlText}>Predictive availability analysis based on user patterns</Text>
-            </View>
-            <View style={styles.mlFeature}>
-              <Ionicons name="time-outline" size={20} color="#f59e0b" />
-              <Text style={styles.mlText}>Optimal reminder timing using ML models</Text>
-            </View>
-            <View style={styles.mlFeature}>
-              <Ionicons name="phone-portrait-outline" size={20} color="#f59e0b" />
-              <Text style={styles.mlText}>Multi-channel communication (SMS, App, Voice)</Text>
-            </View>
-          </View>
+          
         </ScrollView>
       </LinearGradient>
     </View>

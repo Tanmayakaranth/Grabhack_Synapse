@@ -173,7 +173,7 @@ const OverloadedRestaurantScreen = ({ navigation }) => {
           </View>
 
           {/* Backend Integration Info */}
-          <View style={styles.integrationContainer}>
+          {/* <View style={styles.integrationContainer}>
             <Text style={styles.integrationTitle}>Backend & ML Integration</Text>
             <View style={styles.integrationGrid}>
               <View style={styles.integrationItem}>
@@ -193,7 +193,7 @@ const OverloadedRestaurantScreen = ({ navigation }) => {
                 <Text style={styles.integrationText}>ML:Scikit-learn</Text>
               </View>
             </View>
-          </View>
+          </View> */}
 
           {/* CTA Section */}
           <View style={styles.ctaContainer}>
@@ -201,10 +201,10 @@ const OverloadedRestaurantScreen = ({ navigation }) => {
               colors={['#f59e0b', '#d97706']}
               style={styles.ctaGradient}
             >
-              <Text style={styles.ctaTitle}>Ready to Optimize?</Text>
+              {/* <Text style={styles.ctaTitle}>Ready to Optimize?</Text>
               <Text style={styles.ctaDescription}>
                 Tap on any feature above to see how our AI-powered solutions can transform your delivery experience
-              </Text>
+              </Text> */}
             </LinearGradient>
           </View>
         </ScrollView>

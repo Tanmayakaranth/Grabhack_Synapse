@@ -107,7 +107,7 @@ const RecipientUnavailableScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
         >
           {/* Header */}
-          <View style={styles.header}>
+          {/* <View style={styles.header}>
             <View style={styles.problemContainer}>
               <Ionicons name="alert-circle-outline" size={24} color="#f59e0b" />
               <Text style={styles.problemTitle}>THE PROBLEM</Text>
@@ -116,10 +116,10 @@ const RecipientUnavailableScreen = ({ navigation }) => {
               A delivery partner arrives at the destination, but the recipient is not available 
               to receive a valuable package
             </Text>
-          </View>
+          </View> */}
 
           {/* Flow Visualization */}
-          <View style={styles.flowContainer}>
+          {/* <View style={styles.flowContainer}>
             <Text style={styles.flowTitle}>Solution Flow</Text>
             <View style={styles.flowSteps}>
               {features.map((feature, index) => (
@@ -135,7 +135,7 @@ const RecipientUnavailableScreen = ({ navigation }) => {
                 </View>
               ))}
             </View>
-          </View>
+          </View> */}
 
           {/* Feature Cards */}
           <View style={styles.featuresContainer}>
@@ -143,7 +143,7 @@ const RecipientUnavailableScreen = ({ navigation }) => {
           </View>
 
           {/* Tech Stack */}
-          <View style={styles.techStack}>
+          {/* <View style={styles.techStack}>
             <Text style={styles.techTitle}>TECH STACK</Text>
             <View style={styles.techItems}>
               <Text style={styles.techText}>
@@ -151,7 +151,7 @@ const RecipientUnavailableScreen = ({ navigation }) => {
                 Maps & Geolocation (Google Maps API), Notifications & Communication (Twilio SMS/Voice, LLM API for Voice Connect)
               </Text>
             </View>
-          </View>
+          </View> */}
         </ScrollView>
       </LinearGradient>
     </View>
