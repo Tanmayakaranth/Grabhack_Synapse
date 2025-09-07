@@ -3,28 +3,29 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const PreOrderScreen = () => {
+const PostOrderScreen = () => {
   const features = [
-    'Show past logs: Displays average wait times and peak hours for a restaurant.',
-    'Predict crowding risk: Uses AI to predict potential delays in advance.',
-    'Highlights faster alternatives in search results based on predicted wait times.'
+    'Forward to a similar restaurant: The system can auto-shift a delayed order to another restaurant.',
+    'Quick Reorder: A one-click option to cancel and reorder the meal from a different location.',
+    'Compensation: Provides instant vouchers or discounts to compensate for significant delays.',
+    'Cancel with full refund: Offers a no-hassle way to cancel the order and receive a full refund.'
   ];
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.mainTitle}>Pre-Order (Precaution)</Text>
+          <Text style={styles.mainTitle}>Post-Order</Text>
           <Text style={styles.description}>
-            Predicts and alerts customers to potential delays before they place an order.
+            Provides resolutions for significant delays and customer dissatisfaction.
           </Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.card}>
-            <Ionicons name="fast-food-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Proactive Analytics</Text>
+            <Ionicons name="sync-outline" size={50} color="#8b5cf6" style={styles.icon} />
+            <Text style={styles.cardTitle}>Intelligent Resolution</Text>
             <Text style={styles.cardDescription}>
-              Our system uses historical data and AI to identify and warn about potential delays at restaurants before you even order.
+              Our system offers proactive solutions to minimize the impact of long waits and unexpected delays.
             </Text>
           </View>
           <View style={styles.featuresSection}>
@@ -117,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreOrderScreen;
+export default PostOrderScreen;

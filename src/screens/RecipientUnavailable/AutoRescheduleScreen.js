@@ -3,35 +3,36 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const PreOrderScreen = () => {
+const AutoRescheduleScreen = () => {
   const features = [
-    'Show past logs: Displays average wait times and peak hours for a restaurant.',
-    'Predict crowding risk: Uses AI to predict potential delays in advance.',
-    'Highlights faster alternatives in search results based on predicted wait times.'
+    'System auto-suggests the next best delivery slot.',
+    'Suggestions are based on real-time traffic data, delivery route efficiency, and recipient availability patterns.',
+    'Notifications sent to the recipient for approval, with one-tap confirmation.',
+    'Reduces manual intervention and minimizes delivery delays.'
   ];
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.mainTitle}>Pre-Order (Precaution)</Text>
+          <Text style={styles.mainTitle}>Auto Reschedule</Text>
           <Text style={styles.description}>
-            Predicts and alerts customers to potential delays before they place an order.
+            Automatically propose new delivery slots to ensure successful delivery.
           </Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.card}>
-            <Ionicons name="fast-food-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Proactive Analytics</Text>
+            <Ionicons name="calendar-outline" size={50} color="#f59e0b" style={styles.icon} />
+            <Text style={styles.cardTitle}>Smart Scheduling</Text>
             <Text style={styles.cardDescription}>
-              Our system uses historical data and AI to identify and warn about potential delays at restaurants before you even order.
+              Our AI analyzes multiple data points to intelligently suggest the most likely time for a successful redelivery.
             </Text>
           </View>
           <View style={styles.featuresSection}>
             <Text style={styles.featuresTitle}>Key Features</Text>
             {features.map((feature, index) => (
               <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#8b5cf6" />
+                <Ionicons name="checkmark-circle-outline" size={20} color="#f59e0b" />
                 <Text style={styles.featureText}>{feature}</Text>
               </View>
             ))}
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   mainTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#8b5cf6',
+    color: '#f59e0b',
     textAlign: 'center',
   },
   description: {
@@ -117,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreOrderScreen;
+export default AutoRescheduleScreen;

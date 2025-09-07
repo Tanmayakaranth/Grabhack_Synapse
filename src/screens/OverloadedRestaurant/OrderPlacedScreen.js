@@ -3,28 +3,29 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const PreOrderScreen = () => {
+const OrderPlacedScreen = () => {
   const features = [
-    'Show past logs: Displays average wait times and peak hours for a restaurant.',
-    'Predict crowding risk: Uses AI to predict potential delays in advance.',
-    'Highlights faster alternatives in search results based on predicted wait times.'
+    'Continuous monitoring of restaurant load and wait time after your order is placed.',
+    'Automated alerts to customers if an updated ETA is available.',
+    'AI auto-flags an order for potential delays if the prep time exceeds a set threshold.',
+    'Proactive communication to manage customer expectations and prevent frustration.'
   ];
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.mainTitle}>Pre-Order (Precaution)</Text>
+          <Text style={styles.mainTitle}>Order Placed</Text>
           <Text style={styles.description}>
-            Predicts and alerts customers to potential delays before they place an order.
+            Monitor and update customers on their order status in real time.
           </Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.card}>
-            <Ionicons name="fast-food-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Proactive Analytics</Text>
+            <Ionicons name="pizza-outline" size={50} color="#8b5cf6" style={styles.icon} />
+            <Text style={styles.cardTitle}>Proactive Monitoring</Text>
             <Text style={styles.cardDescription}>
-              Our system uses historical data and AI to identify and warn about potential delays at restaurants before you even order.
+              Our system keeps an eye on your order to ensure it's on track and updates you if anything changes.
             </Text>
           </View>
           <View style={styles.featuresSection}>
@@ -117,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreOrderScreen;
+export default OrderPlacedScreen;

@@ -3,35 +3,36 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const PreOrderScreen = () => {
+const TrustedHandoverScreen = () => {
   const features = [
-    'Show past logs: Displays average wait times and peak hours for a restaurant.',
-    'Predict crowding risk: Uses AI to predict potential delays in advance.',
-    'Highlights faster alternatives in search results based on predicted wait times.'
+    'Allow deliveries to be made to an authorized person, neighbor, or a nearby partner store.',
+    'Utilize digital consent to securely authorize the handover of packages.',
+    'Provide clear instructions and a secure process for the delivery partner.',
+    'Log and track the handover for a transparent and reliable delivery record.',
   ];
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.mainTitle}>Pre-Order (Precaution)</Text>
+          <Text style={styles.mainTitle}>Trusted Handover</Text>
           <Text style={styles.description}>
-            Predicts and alerts customers to potential delays before they place an order.
+            Enable secure and flexible package handovers when the recipient is unavailable.
           </Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.card}>
-            <Ionicons name="fast-food-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Proactive Analytics</Text>
+            <Ionicons name="hand-right-outline" size={50} color="#f59e0b" style={styles.icon} />
+            <Text style={styles.cardTitle}>Digital Consent & Security</Text>
             <Text style={styles.cardDescription}>
-              Our system uses historical data and AI to identify and warn about potential delays at restaurants before you even order.
+              Our system allows recipients to provide digital consent for a secure and authorized handover to a trusted third party.
             </Text>
           </View>
           <View style={styles.featuresSection}>
             <Text style={styles.featuresTitle}>Key Features</Text>
             {features.map((feature, index) => (
               <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#8b5cf6" />
+                <Ionicons name="checkmark-circle-outline" size={20} color="#f59e0b" />
                 <Text style={styles.featureText}>{feature}</Text>
               </View>
             ))}
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   mainTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#8b5cf6',
+    color: '#f59e0b',
     textAlign: 'center',
   },
   description: {
@@ -117,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreOrderScreen;
+export default TrustedHandoverScreen;
