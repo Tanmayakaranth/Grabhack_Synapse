@@ -9,31 +9,57 @@ import axios from "axios";
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const API_URL = "http://10.20.202.73:5000"; // Change this if needed
+    const API_URL = "http://10.174.44.178:5000";// Change this if needed
 
-    const handleLogin = async () => {
-        if (!email || !password) {
-            Alert.alert("Error", "Please enter both email and password.");
-            return;
+    // const handleLogin = async () => {
+    //     if (!email || !password) {
+    //         Alert.alert("Error", "Please enter both email and password.");
+    //         return;
+    //     }
+
+    //     try {
+    //         console.log("Sending Login Request...");
+    //         const response = await axios.post(`${API_URL}/login`, { email, password });
+
+    //         console.log("Login Response:", response.data);
+
+    //         if (response.status === 200) {
+    //             await AsyncStorage.setItem("token", response.data.token);
+    //             Alert.alert("Success", "Login successful! Redirecting...");
+    //             navigation.replace("Delivery"); // ✅ Navigate to DeliveryScreen after login
+    //         }
+    //     } catch (error) {
+    //         console.error("Login Error:", error.response ? error.response.data : error);
+    //         Alert.alert("Login Failed", error.response?.data?.message || "Invalid credentials.");
+    //     }
+    // };
+    // In LoginScreen.js, update handleLogin
+const handleLogin = async () => {
+    if (!email || !password) {
+        Alert.alert("Error", "Please enter both email and password.");
+        return;
+    }
+
+    try {
+        console.log("Sending Login Request to:", `${API_URL}/login`);
+        const response = await axios.post(`${API_URL}/login`, { email, password });
+        console.log("Login Response:", response.data);
+
+        if (response.status === 200) {
+            await AsyncStorage.setItem("token", response.data.token);
+            Alert.alert("Success", "Login successful! Redirecting...");
+            setEmail(""); // Clear form
+            setPassword("");
+            navigation.replace("Home"); // Navigate to Home (or Delivery if it exists)
         }
-
-        try {
-            console.log("Sending Login Request...");
-            const response = await axios.post(`${API_URL}/login`, { email, password });
-
-            console.log("Login Response:", response.data);
-
-            if (response.status === 200) {
-                await AsyncStorage.setItem("token", response.data.token);
-                Alert.alert("Success", "Login successful! Redirecting...");
-                navigation.replace("Delivery"); // ✅ Navigate to DeliveryScreen after login
-            }
-        } catch (error) {
-            console.error("Login Error:", error.response ? error.response.data : error);
-            Alert.alert("Login Failed", error.response?.data?.message || "Invalid credentials.");
-        }
-    };
-
+    } catch (error) {
+        console.error("Login Error:", error.message, error.config, error.response?.data);
+        Alert.alert(
+            "Login Failed",
+            error.response?.data?.message || "Network error. Please check your connection or server URL."
+        );
+    }
+};
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>

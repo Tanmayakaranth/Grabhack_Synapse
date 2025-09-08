@@ -11,34 +11,67 @@ export default function SignupScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const API_URL = "http://10.20.202.73:5000"; // Change this if needed
+    const API_URL = "http://10.174.44.178:5000"; // Change this if needed
 
-    const handleSignUp = async () => {
-        if (!fullName || !email || !password || !confirmPassword) {
-            Alert.alert("Error", "Please fill all fields.");
-            return;
+    // const handleSignUp = async () => {
+    //     if (!fullName || !email || !password || !confirmPassword) {
+    //         Alert.alert("Error", "Please fill all fields.");
+    //         return;
+    //     }
+    //     if (password !== confirmPassword) {
+    //         Alert.alert("Error", "Passwords do not match.");
+    //         return;
+    //     }
+
+    //     try {
+    //         console.log("Sending Signup Request...");
+    //         const response = await axios.post(`${API_URL}/signup`, { fullName, email, password });
+
+    //         console.log("Signup Response:", response.data);
+
+    //         if (response.status === 201) {
+    //             await AsyncStorage.setItem("token", response.data.token);
+    //             Alert.alert("Success", "Account created! Redirecting to login...");
+    //             navigation.replace("Login"); // Ensure it replaces the current screen
+    //         }
+    //     } catch (error) {
+    //         console.error("Signup Error:", error.response ? error.response.data : error);
+    //         Alert.alert("Signup Failed", error.response?.data?.message || "Something went wrong.");
+    //     }
+    // };
+    // In SignupScreen.js, update handleSignUp
+const handleSignUp = async () => {
+    if (!fullName || !email || !password || !confirmPassword) {
+        Alert.alert("Error", "Please fill all fields.");
+        return;
+    }
+    if (password !== confirmPassword) {
+        Alert.alert("Error", "Passwords do not match.");
+        return;
+    }
+
+    try {
+        console.log("Sending Signup Request to:", `${API_URL}/signup`);
+        const response = await axios.post(`${API_URL}/signup`, { fullName, email, password });
+        console.log("Signup Response:", response.data);
+
+        if (response.status === 201) {
+            await AsyncStorage.setItem("token", response.data.token);
+            Alert.alert("Success", "Account created! Redirecting to login...");
+            setFullName(""); // Clear form
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+            navigation.replace("Login");
         }
-        if (password !== confirmPassword) {
-            Alert.alert("Error", "Passwords do not match.");
-            return;
-        }
-
-        try {
-            console.log("Sending Signup Request...");
-            const response = await axios.post(`${API_URL}/signup`, { fullName, email, password });
-
-            console.log("Signup Response:", response.data);
-
-            if (response.status === 201) {
-                await AsyncStorage.setItem("token", response.data.token);
-                Alert.alert("Success", "Account created! Redirecting to login...");
-                navigation.replace("Login"); // Ensure it replaces the current screen
-            }
-        } catch (error) {
-            console.error("Signup Error:", error.response ? error.response.data : error);
-            Alert.alert("Signup Failed", error.response?.data?.message || "Something went wrong.");
-        }
-    };
+    } catch (error) {
+        console.error("Signup Error:", error.message, error.config, error.response?.data);
+        Alert.alert(
+            "Signup Failed",
+            error.response?.data?.message || "Network error. Please check your connection or server URL."
+        );
+    }
+};
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>

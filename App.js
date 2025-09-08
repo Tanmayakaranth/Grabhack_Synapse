@@ -7,6 +7,8 @@ import { StatusBar } from 'expo-status-bar';
 import HomeScreen from './src/screens/HomeScreen';
 import RecipientUnavailableScreen from './src/screens/RecipientUnavailableScreen';
 import OverloadedRestaurantScreen from './src/screens/OverloadedRestaurantScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import SignupScreen from './src/screens/SignupScreen';
 
 // Recipient Unavailable Feature Screens
 import PreCheckAvailabilityScreen from './src/screens/RecipientUnavailable/PreCheckAvailabilityScreen';
@@ -29,7 +31,7 @@ export default function App() {
     <NavigationContainer>
       <StatusBar style="auto" />
       <Stack.Navigator 
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#f59e0b',
@@ -40,6 +42,18 @@ export default function App() {
           },
         }}
       >
+        {/* Authentication Screens */}
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ title: 'Login', headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Signup" 
+          component={SignupScreen} 
+          options={{ title: 'Sign Up', headerShown: false }}
+        />
+
         {/* Main Navigation */}
         <Stack.Screen 
           name="Home" 
