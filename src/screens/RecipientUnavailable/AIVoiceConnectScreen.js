@@ -28,15 +28,7 @@ const AIVoiceConnectScreen = () => {
               Our AI voice assistant provides a proactive solution to a common delivery problem, ensuring every package finds its way.
             </Text>
           </View>
-          <View style={styles.featuresSection}>
-            <Text style={styles.featuresTitle}>Key Features</Text>
-            {features.map((feature, index) => (
-              <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#f59e0b" />
-                <Text style={styles.featureText}>{feature}</Text>
-              </View>
-            ))}
-          </View>
+          
         </View>
       </ScrollView>
     </LinearGradient>

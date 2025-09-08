@@ -1,15 +1,57 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 const OrderPlacedScreen = () => {
-  const features = [
-    'Continuous monitoring of restaurant load and wait time after your order is placed.',
-    'Automated alerts to customers if an updated ETA is available.',
-    'AI auto-flags an order for potential delays if the prep time exceeds a set threshold.',
-    'Proactive communication to manage customer expectations and prevent frustration.'
-  ];
+  const [prepTime, setPrepTime] = useState(20); // Initial simulated prep time
+  const [orderStatus, setOrderStatus] = useState('on-track'); // 'on-track' or 'delayed'
+  const prepTimeThreshold = 30; // Time in minutes to trigger a "delayed" alert
+  const originalETA = '3:45 PM';
+
+  useEffect(() => {
+    // Simulating continuous monitoring
+    const interval = setInterval(() => {
+      setPrepTime(prevTime => {
+        const newTime = prevTime + 5;
+        if (newTime >= prepTimeThreshold) {
+          setOrderStatus('delayed');
+        }
+        return newTime;
+      });
+    }, 5000); // Check every 5 seconds
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+
+  const renderOnTrackView = () => (
+    <View style={styles.statusCard}>
+      <Ionicons name="checkmark-circle-outline" size={50} color="#8b5cf6" style={styles.icon} />
+      <Text style={styles.statusTitle}>Order on Track</Text>
+      <Text style={styles.statusDescription}>
+        The restaurant is preparing your order.
+        <Text style={styles.boldText}> Your estimated delivery is {originalETA}.</Text>
+      </Text>
+    </View>
+  );
+
+  const renderDelayedView = () => (
+    <View style={styles.alertContainer}>
+      <Ionicons name="alert-circle-outline" size={30} color="#8b5cf6" />
+      <Text style={styles.alertTitle}>Alert: Potential Delay</Text>
+      <Text style={styles.alertText}>
+        The restaurant's prep time is longer than expected. We've automatically adjusted your ETA.
+      </Text>
+      <Text style={styles.newETAText}>New Estimated Time: 4:15 PM</Text>
+      <TouchableOpacity
+        style={styles.optionButton}
+        onPress={() => { /* Logic to contact support */ }}
+      >
+        <Text style={styles.optionButtonText}>Contact Support</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
@@ -17,26 +59,12 @@ const OrderPlacedScreen = () => {
         <View style={styles.header}>
           <Text style={styles.mainTitle}>Order Placed</Text>
           <Text style={styles.description}>
-            Monitor and update customers on their order status in real time.
+            Monitor and update order status in real time.
           </Text>
         </View>
         <View style={styles.contentContainer}>
-          <View style={styles.card}>
-            <Ionicons name="pizza-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Proactive Monitoring</Text>
-            <Text style={styles.cardDescription}>
-              Our system keeps an eye on your order to ensure it's on track and updates you if anything changes.
-            </Text>
-          </View>
-          <View style={styles.featuresSection}>
-            <Text style={styles.featuresTitle}>Key Features</Text>
-            {features.map((feature, index) => (
-              <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#8b5cf6" />
-                <Text style={styles.featureText}>{feature}</Text>
-              </View>
-            ))}
-          </View>
+          {orderStatus === 'on-track' && renderOnTrackView()}
+          {orderStatus === 'delayed' && renderDelayedView()}
         </View>
       </ScrollView>
     </LinearGradient>
@@ -71,7 +99,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
   },
-  card: {
+  statusCard: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 20,
     padding: 20,
@@ -81,40 +109,63 @@ const styles = StyleSheet.create({
   icon: {
     marginBottom: 10,
   },
-  cardTitle: {
+  statusTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: 'white',
     marginBottom: 10,
   },
-  cardDescription: {
+  statusDescription: {
     fontSize: 14,
     color: '#e5e7eb',
     textAlign: 'center',
     lineHeight: 20,
   },
-  featuresSection: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 15,
+  boldText: {
+    fontWeight: 'bold',
+    color: '#8b5cf6',
+  },
+  alertContainer: {
+    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+    borderRadius: 20,
     padding: 20,
+    alignItems: 'center',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#8b5cf6',
   },
-  featuresTitle: {
+  alertTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 10,
   },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 15,
-  },
-  featureText: {
+  alertText: {
     fontSize: 14,
     color: '#e5e7eb',
-    marginLeft: 10,
-    flex: 1,
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 15,
+  },
+  newETAText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#8b5cf6',
+    marginTop: 10,
+  },
+  optionButton: {
+    backgroundColor: '#8b5cf6',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
+  },
+  optionButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 

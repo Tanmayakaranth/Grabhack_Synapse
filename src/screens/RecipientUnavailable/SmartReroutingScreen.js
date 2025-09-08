@@ -32,25 +32,25 @@ const SmartReroutingScreen = ({ navigation }) => {
     const mockAlternatives = [
       {
         id: 1,
+        type: 'other_vehicle',
+        name: 'Transfer to Vehicle #47',
+        address: 'Mobile handoff point',
+        distance: '1.2 km',
+        confidence: 95,
+        authorizedBy: 'System',
+        estimatedTime: '10 min',
+        icon: 'car-outline'
+      },
+      {
+        id: 2,
         type: 'neighbor',
         name: 'Sarah Wilson (Neighbor)',
         address: '458 Oak Street, Apt 2B',
         distance: '0.1 km',
-        confidence: 95,
+        confidence: 90,
         authorizedBy: 'Recipient',
         estimatedTime: '2 min',
         icon: 'home-outline'
-      },
-      {
-        id: 2,
-        type: 'partner_store',
-        name: 'QuickMart Store',
-        address: '123 Pine Street',
-        distance: '0.8 km',
-        confidence: 90,
-        authorizedBy: 'System',
-        estimatedTime: '8 min',
-        icon: 'storefront-outline'
       },
       {
         id: 3,
@@ -65,14 +65,14 @@ const SmartReroutingScreen = ({ navigation }) => {
       },
       {
         id: 4,
-        type: 'other_vehicle',
-        name: 'Transfer to Vehicle #47',
-        address: 'Mobile handoff point',
-        distance: '1.2 km',
+        type: 'partner_store',
+        name: 'QuickMart Store',
+        address: '123 Pine Street',
+        distance: '0.8 km',
         confidence: 80,
         authorizedBy: 'System',
-        estimatedTime: '10 min',
-        icon: 'car-outline'
+        estimatedTime: '8 min',
+        icon: 'storefront-outline'
       }
     ];
 
@@ -201,14 +201,7 @@ const SmartReroutingScreen = ({ navigation }) => {
             <Text style={styles.subtitle}>Dynamic Delivery Optimization</Text>
           </View>
 
-          {/* Status Indicator */}
-          <View style={[styles.statusContainer, { backgroundColor: `${statusConfig.color}20` }]}>
-            <Ionicons name={statusConfig.icon} size={24} color={statusConfig.color} />
-            <Text style={[styles.statusText, { color: statusConfig.color }]}>{statusConfig.text}</Text>
-            {(reroutingStatus === 'analyzing' || reroutingStatus === 'executing') && (
-              <ActivityIndicator size="small" color={statusConfig.color} style={{ marginLeft: 10 }} />
-            )}
-          </View>
+          
 
           {/* Current Delivery Info */}
           {currentLocation && (
@@ -238,14 +231,26 @@ const SmartReroutingScreen = ({ navigation }) => {
               </View>
             </View>
           )}
+          {/* Status Indicator */}
+          {/* <View style={[styles.statusContainer, { backgroundColor: `${statusConfig.color}20` }]}>
+            <Ionicons name={statusConfig.icon} size={24} color={statusConfig.color} />
+            <Text style={[styles.statusText, { color: statusConfig.color }]}>{statusConfig.text}</Text>
+            {(reroutingStatus === 'analyzing' || reroutingStatus === 'executing') && (
+              <ActivityIndicator size="small" color={statusConfig.color} style={{ marginLeft: 10 }} />
+            )}
+          </View> */}
 
           {/* Alternative Options */}
           {alternativeOptions.length > 0 && (
             <View style={styles.optionsContainer}>
-              <Text style={styles.sectionTitle}>Alternative Delivery Options</Text>
-              <Text style={styles.sectionDescription}>
-                AI-powered analysis of nearby delivery alternatives
-              </Text>
+              <Text style={styles.sectionTitle}>Best Alternative Delivery Options</Text>
+              <View style={[styles.statusContainer, { backgroundColor: `${statusConfig.color}20` }]}>
+                <Ionicons name={statusConfig.icon} size={24} color={statusConfig.color} />
+                <Text style={[styles.statusText, { color: statusConfig.color }]}>{statusConfig.text}</Text>
+                {(reroutingStatus === 'analyzing' || reroutingStatus === 'executing') && (
+                  <ActivityIndicator size="small" color={statusConfig.color} style={{ marginLeft: 10 }} />
+                )}
+              </View>
               {alternativeOptions.map(renderAlternativeCard)}
             </View>
           )}

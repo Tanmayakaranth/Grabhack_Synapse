@@ -1,42 +1,109 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 const AtCheckoutScreen = () => {
-  const features = [
-    'Live load indicator: A visual representation of the current restaurant load.',
-    'Real-time wait time: Displays the current preparation and wait time for your order.',
-    'Smart alert: Notifies customers with messages like "This restaurant has ~40 min wait, want to switch?"',
-    'Suggests similar restaurants with shorter prep times.'
+  const [currentWaitTime, setCurrentWaitTime] = useState(45); // Simulated wait time
+  const [actionTaken, setActionTaken] = useState(null); // 'switched' or 'proceeded'
+
+  const waitTimeThreshold = 30; // Minutes
+  const isLongWait = currentWaitTime > waitTimeThreshold;
+
+  const similarRestaurants = [
+    { id: 1, name: 'Taco Emporium', prepTime: 15 },
+    { id: 2, name: 'Burger Barn', prepTime: 20 },
+    { id: 3, name: 'Pizza Place', prepTime: 25 },
   ];
+
+  const renderInitialView = () => (
+    <>
+      <View style={styles.infoCard}>
+        <Ionicons name="timer-outline" size={50} color="#8b5cf6" style={styles.icon} />
+        <Text style={styles.infoTitle}>Current Wait Time</Text>
+        <Text style={styles.infoText}>
+          The estimated wait time for this restaurant is
+          <Text style={styles.boldText}> {currentWaitTime} minutes.</Text>
+        </Text>
+      </View>
+
+      {isLongWait && (
+        <View style={styles.alertContainer}>
+          <Ionicons name="alert-circle-outline" size={30} color="#8b5cf6" />
+          <Text style={styles.alertTitle}>Alert</Text>
+          <Text style={styles.alertText}>
+            This restaurant has a long wait time. Would you like to switch to a faster option?
+          </Text>
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => setActionTaken('switched')}
+          >
+            <Text style={styles.optionButtonText}>Switch to a faster restaurant</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionButtonSecondary}
+            onPress={() => setActionTaken('proceeded')}
+          >
+            <Text style={styles.optionButtonTextSecondary}>Proceed with this order</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {!isLongWait && (
+        <View style={styles.infoCard}>
+          <Text style={styles.infoText}>
+            Looks like there is no wait time issue. Your order will be placed soon.
+          </Text>
+        </View>
+      )}
+    </>
+  );
+
+  const renderSwitchedView = () => (
+    <View style={styles.switchedContainer}>
+      <Ionicons name="swap-horizontal" size={50} color="#8b5cf6" style={styles.icon} />
+      <Text style={styles.switchedTitle}>Finding faster options...</Text>
+      <Text style={styles.switchedDescription}>
+        We found these similar restaurants with estimated shorter wait times for similar order.
+      </Text>
+      {similarRestaurants.map((restaurant) => (
+        <TouchableOpacity key={restaurant.id} style={styles.restaurantButton}>
+          <Text style={styles.restaurantName}>{restaurant.name}</Text>
+          <Text style={styles.restaurantTime}>{restaurant.prepTime} min wait</Text>
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity onPress={() => setActionTaken(null)} style={styles.backButton}>
+        <Ionicons name="arrow-back-circle-outline" size={24} color="#8b5cf6" />
+        <Text style={styles.backButtonText}>Back to options</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderProceededView = () => (
+    <View style={styles.proceededContainer}>
+      <Ionicons name="checkmark-circle-outline" size={50} color="#8b5cf6" style={styles.icon} />
+      <Text style={styles.proceededTitle}>Order Confirmed</Text>
+      <Text style={styles.proceededDescription}>
+        You have chosen to proceed. Your order will now be placed.
+      </Text>
+      <TouchableOpacity onPress={() => setActionTaken(null)} style={styles.backButton}>
+        <Ionicons name="arrow-back-circle-outline" size={24} color="#8b5cf6" />
+        <Text style={styles.backButtonText}>Back to options</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <LinearGradient colors={['#1e293b', '#334155']} style={styles.background}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.mainTitle}>At Checkout</Text>
-          <Text style={styles.description}>
-            Provides real-time transparency and smart alternatives during the decision-making process.
-          </Text>
+         
         </View>
         <View style={styles.contentContainer}>
-          <View style={styles.card}>
-            <Ionicons name="timer-outline" size={50} color="#8b5cf6" style={styles.icon} />
-            <Text style={styles.cardTitle}>Wait Time Transparency</Text>
-            <Text style={styles.cardDescription}>
-              Informs customers of potential delays and offers a chance to switch to a faster option before placing the order.
-            </Text>
-          </View>
-          <View style={styles.featuresSection}>
-            <Text style={styles.featuresTitle}>Key Features</Text>
-            {features.map((feature, index) => (
-              <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#8b5cf6" />
-                <Text style={styles.featureText}>{feature}</Text>
-              </View>
-            ))}
-          </View>
+          {actionTaken === 'switched' && renderSwitchedView()}
+          {actionTaken === 'proceeded' && renderProceededView()}
+          {actionTaken === null && renderInitialView()}
         </View>
       </ScrollView>
     </LinearGradient>
@@ -71,7 +138,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
   },
-  card: {
+  infoCard: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 20,
     padding: 20,
@@ -81,40 +148,139 @@ const styles = StyleSheet.create({
   icon: {
     marginBottom: 10,
   },
-  cardTitle: {
+  infoTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: 'white',
     marginBottom: 10,
   },
-  cardDescription: {
-    fontSize: 14,
+  infoText: {
+    fontSize: 16,
     color: '#e5e7eb',
     textAlign: 'center',
     lineHeight: 20,
   },
-  featuresSection: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 15,
+  boldText: {
+    fontWeight: 'bold',
+    color: '#8b5cf6',
+  },
+  alertContainer: {
+    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+    borderRadius: 20,
     padding: 20,
+    alignItems: 'center',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#8b5cf6',
   },
-  featuresTitle: {
+  alertTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 10,
   },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 15,
-  },
-  featureText: {
+  alertText: {
     fontSize: 14,
     color: '#e5e7eb',
-    marginLeft: 10,
-    flex: 1,
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 15,
+  },
+  optionButton: {
+    backgroundColor: '#8b5cf6',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginBottom: 10,
+    width: '100%',
+    alignItems: 'center',
+  },
+  optionButtonSecondary: {
+    backgroundColor: 'transparent',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#8b5cf6',
+    width: '100%',
+    alignItems: 'center',
+  },
+  optionButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  optionButtonTextSecondary: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#8b5cf6',
+  },
+  // Switched View Styles
+  switchedContainer: {
+    alignItems: 'center',
+  },
+  switchedTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  switchedDescription: {
+    fontSize: 14,
+    color: '#e5e7eb',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  restaurantButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  restaurantName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  restaurantTime: {
+    fontSize: 14,
+    color: '#8b5cf6',
+  },
+  // Proceeded View Styles
+  proceededContainer: {
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 20,
+  },
+  proceededTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 10,
+  },
+  proceededDescription: {
+    fontSize: 14,
+    color: '#e5e7eb',
+    textAlign: 'center',
+    marginTop: 5,
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: '#8b5cf6',
+    marginLeft: 5,
   },
 });
 

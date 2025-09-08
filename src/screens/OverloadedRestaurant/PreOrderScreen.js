@@ -27,15 +27,7 @@ const PreOrderScreen = () => {
               Our system uses historical data and AI to identify and warn about potential delays at restaurants before you even order.
             </Text>
           </View>
-          <View style={styles.featuresSection}>
-            <Text style={styles.featuresTitle}>Key Features</Text>
-            {features.map((feature, index) => (
-              <View key={index} style={styles.featureItem}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#8b5cf6" />
-                <Text style={styles.featureText}>{feature}</Text>
-              </View>
-            ))}
-          </View>
+          
         </View>
       </ScrollView>
     </LinearGradient>
