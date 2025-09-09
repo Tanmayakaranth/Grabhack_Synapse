@@ -119,56 +119,12 @@ const OverloadedRestaurantScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
         >
           {/* Header */}
-          <View style={styles.header}>
-            <View style={styles.problemContainer}>
-              <Ionicons name="restaurant" size={24} color="#f59e0b" />
-              <Text style={styles.problemTitle}>THE PROBLEM</Text>
-            </View>
-            <Text style={styles.problemDescription}>
-              Food delivery often faces long delays when restaurants get overcrowded. 
-              Customers wait longer, orders get stuck, and frustration rises.
-            </Text>
-          </View>
+          
 
-          {/* Stats Banner */}
-          <View style={styles.statsContainer}>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>40+</Text>
-              <Text style={styles.statLabel}>Min Delays</Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>60%</Text>
-              <Text style={styles.statLabel}>Peak Hours</Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>25%</Text>
-              <Text style={styles.statLabel}>Cancellations</Text>
-            </View>
-          </View>
-
-          {/* Solution Flow */}
-          <View style={styles.flowContainer}>
-            <Text style={styles.flowTitle}>Smart Solution Pipeline</Text>
-            <View style={styles.flowSteps}>
-              {features.map((feature, index) => (
-                <View key={feature.id} style={styles.flowStep}>
-                  <View style={[styles.flowDot, { backgroundColor: feature.color[0] }]}>
-                    <Text style={styles.flowDotText}>{feature.id}</Text>
-                  </View>
-                  {index < features.length - 1 && (
-                    <View style={styles.flowConnector}>
-                      <View style={styles.flowLine} />
-                      <Ionicons name="chevron-forward" size={12} color="#6b7280" />
-                    </View>
-                  )}
-                </View>
-              ))}
-            </View>
-          </View>
 
           {/* Feature Cards */}
           <View style={styles.featuresContainer}>
-            <Text style={styles.featuresTitle}>Explore Each Solution</Text>
+            
             {features.map(renderFeatureCard)}
           </View>
 
